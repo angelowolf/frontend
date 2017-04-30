@@ -1,0 +1,13 @@
+export const apiDomain = 'http://192.168.1.5:8080/api/'
+export const loginUrl = apiDomain + 'autorizar/login'
+export const usuarioUrl = apiDomain + 'usuario/'
+export const hijosListUrl = apiDomain + 'api/hijos'
+export const tipoHabitacionUrl = apiDomain + 'tipohabitacion/'
+export const habitacionUrl = apiDomain + 'habitacion/'
+export const reservaUrl = apiDomain + 'reserva/'
+export const tipoDocumentoUrl = apiDomain + 'tipodocumento/'
+export const pasajeroUrl = apiDomain + 'pasajero/'
+
+export const fullCalendar = apiDomain + 'fullcalendar/'
+export const fullCalendarHabitacion = fullCalendar + 'habitacion/'
+export const fullCalendarReserva = fullCalendar + 'reserva/'
