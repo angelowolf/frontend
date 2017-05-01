@@ -1,7 +1,7 @@
 <template>
   <div class="layout-padding">
     <q-data-table
-      :data="getUsuarios"
+      :data="getHabitaciones"
       :config="config"
       :columns="columns"
       @refresh="refresh"
@@ -37,25 +37,25 @@
 <script>
   import { Platform, Utils, Toast } from 'quasar'
   import { mapActions, mapGetters } from 'vuex'
-  import { usuarioUrl } from '../../../configs/urls'
-  import axios from 'axios'
+  import { habitacionUrl } from '../../../configs/urls'
+  import { vueHttp, enviarPeticion } from './../../../configs/servicioRest'
 
   export default {
-    name: 'Usuarios',
+    name: 'TipoHabitaciones',
     created () {
-      this.cargarUsuarios()
+      this.cargarHabitaciones()
     },
     computed: {
       ...mapGetters([
-        'getUsuarios'
+        'getHabitaciones'
       ])
     },
     methods: {
-      ...mapActions([ 'cargarUsuarios' ]),
+      ...mapActions([ 'cargarHabitaciones' ]),
       changeMessage (props) {
         if (props.rows.length === 1) {
-          const usuario = props.rows[0].data
-          this.$router.push('/usuario/editar/' + usuario.id)
+          const habitacion = props.rows[0].data
+          this.$router.push('/habitacion/editar/' + habitacion.id)
         }
         else {
           Toast.create('Seleccioná solo uno para editarlo.')
@@ -63,18 +63,21 @@
       },
       deleteRow (props) {
         props.rows.forEach(row => {
-          // this.table.splice(row.index, 1)
+          enviarPeticion('delete', habitacionUrl + row.data.id, null, reponse => {
+            this.cargarHabitaciones()
+          },
+          response => {
+          })
         })
       },
       refresh (done) {
-        axios.get(usuarioUrl)
-          .then(response => {
-            this.$store.commit('SET_USUARIOS', response.data.datos)
-            done()
-          })
+        vueHttp('get', habitacionUrl, response => {
+          this.$store.commit('SET_HABITACIONES', response.data.datos)
+          done()
+        })
       },
       nuevo () {
-        this.$router.push('/usuario/nuevo')
+        this.$router.push('/habitacion/nuevo')
       }
     },
     beforeDestroy () {
@@ -85,10 +88,10 @@
     data () {
       return {
         config: {
-          title: 'Usuarios',
+          title: 'Habitaciones',
           refresh: true,
           columnPicker: true,
-          leftStickyColumns: 2,
+          leftStickyColumns: 1,
           rightStickyColumns: 0,
           bodyStyle: {
             maxHeight: Platform.is.mobile ? '50vh' : '500px'
@@ -101,7 +104,7 @@
           },
           selection: 'multiple',
           messages: {
-            noData: '<i>warning</i> No hay usuarios disponbiles.',
+            noData: '<i>warning</i> No hay habitaciones disponbiles.',
             noDataAfterFiltering: '<i>warning</i> No hay resultados. Refiná tus términos de búsqueda.'
           },
           labels: {
@@ -109,8 +112,8 @@
             allCols: 'Todas las cols.',
             rows: 'Filas',
             selected: {
-              singular: 'usuario seleccionado.',
-              plural: 'usuarios seleccionados.'
+              singular: 'Habitación seleccionada.',
+              plural: 'Habitaciones seleccionadas.'
             },
             clear: 'Deseleccionar',
             search: 'Buscar',
@@ -123,18 +126,6 @@
             field: 'nombre',
             width: '60px',
             filter: true,
-            sort: 'text'
-          },
-          {
-            label: 'Apellido',
-            field: 'apellido',
-            width: '60px',
-            sort: 'text'
-          },
-          {
-            label: 'Usuario',
-            field: 'usuario',
-            width: '60px',
             sort: 'text'
           }
         ],

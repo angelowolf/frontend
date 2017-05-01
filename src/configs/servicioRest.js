@@ -31,11 +31,18 @@ export function enviarPeticion (tipo, url, postData, onSuccess, onError) {
     axios[metodo](url, postData).then(response => {
       const codigo = parseInt(response.status)
       if (codigo === 200) {
-        Toast.create.positive(response.data.mensaje)
+        if (response.data.mensaje !== null) {
+          Toast.create.positive(response.data.mensaje)
+        }
         onSuccess(response)
       }
       else {
         if (codigo === 220) {
+          if (response.data.datos.listaErrores !== null && response.data.datos.listaErrores.length > 0) {
+            response.data.datos.listaErrores.map(e => {
+              Toast.create.alert(e)
+            })
+          }
           onError(response)
         }
         else {

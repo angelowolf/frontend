@@ -1,4 +1,4 @@
-export const apiDomain = 'http://192.168.1.5:8080/api/'
+export const apiDomain = 'http://localhost:8080/api/'
 export const loginUrl = apiDomain + 'autorizar/login'
 export const usuarioUrl = apiDomain + 'usuario/'
 export const hijosListUrl = apiDomain + 'api/hijos'

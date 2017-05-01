@@ -2,6 +2,8 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import auth from './modules/auth'
 import usuariosStore from './modules/usuariosStore'
+import tipoHabitacionesStore from './modules/tipoHabitacionesStore'
+import habitacionesStore from './modules/habitacionesStore'
 
 Vue.use(Vuex)
 
@@ -56,6 +58,8 @@ export default new Vuex.Store({
   getters,
   modules: {
     auth,
-    usuariosStore
+    usuariosStore,
+    tipoHabitacionesStore,
+    habitacionesStore
   }
 })
