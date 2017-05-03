@@ -4,6 +4,7 @@ import auth from './modules/auth'
 import usuariosStore from './modules/usuariosStore'
 import tipoHabitacionesStore from './modules/tipoHabitacionesStore'
 import habitacionesStore from './modules/habitacionesStore'
+import tipoDocumentos from './modules/tipoDocumentos'
 
 Vue.use(Vuex)
 
@@ -60,6 +61,7 @@ export default new Vuex.Store({
     auth,
     usuariosStore,
     tipoHabitacionesStore,
-    habitacionesStore
+    habitacionesStore,
+    tipoDocumentos
   }
 })

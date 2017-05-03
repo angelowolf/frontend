@@ -11,11 +11,11 @@
   }
 </script>
 <template>
-  <span class="help is-danger" v-if="form.errors.has(nombre)">{{form.errors.get(nombre)}}</span>
+  <span class="help has-error" v-if="form.errors.has(nombre)">{{form.errors.get(nombre)}}</span>
 </template>
 
 <style scoped>
-  .help.is-danger {
+  .help.has-error {
     display: block;
     font-size: .9rem;
     margin-top: 0.25rem;

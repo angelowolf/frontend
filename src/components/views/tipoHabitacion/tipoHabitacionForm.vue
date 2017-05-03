@@ -26,7 +26,7 @@
   import { vueHttp, enviarPeticion } from './../../../configs/servicioRest'
 
   export default {
-    name: 'FormAlumno',
+    name: 'FormTipoHabitacion',
     props: ['id'],
     data () {
       return {

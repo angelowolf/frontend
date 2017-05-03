@@ -127,6 +127,16 @@
             width: '60px',
             filter: true,
             sort: 'text'
+          },
+          {
+            label: 'Tipo',
+            field: 'tipoHabitacion',
+            width: '60px',
+            filter: true,
+            sort: 'text',
+            format (value) {
+              return value.nombre
+            }
           }
         ],
         pagination: true,

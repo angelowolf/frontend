@@ -23,6 +23,7 @@ export default new VueRouter({
   routes: [
     /* { path: '/usuario', component: load('views/usuario/usuarios'), meta: { name: 'Listado Usuarios' } }, */
     { path: '/dashboard', component: load('views/dashboard/one/dashboard'), meta: { name: 'Dashboard One' } },
+    { path: '/reservas', component: load('views/reserva/reserva'), meta: { name: 'Reservas' } },
     { path: '/usuario', component: load('views/usuario/usuarios'), meta: { name: 'Usuarios' } },
     { path: '/usuario/editar/:id', component: load('views/usuario/usuarioForm'), meta: { name: 'Editar Usuario' }, props: true },
     { path: '/usuario/nuevo', cot: load('views/usuario/usuarios'), meta: { name: 'Usuarios' } },

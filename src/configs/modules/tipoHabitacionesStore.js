@@ -37,6 +37,16 @@ const actions = {
 const getters = {
   getTipoHabitaciones (state) {
     return state.tipoHabitaciones
+  },
+  getTipoHabitacionesSelect (state) {
+    let objs = []
+    state.tipoHabitaciones.map(e => {
+      let temp = {}
+      temp.label = e.nombre
+      temp.value = e.id
+      objs.push(temp)
+    })
+    return objs
   }
 }
 
