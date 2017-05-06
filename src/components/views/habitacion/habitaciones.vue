@@ -28,7 +28,7 @@
         </button>
       </template>
     </q-data-table>
-    <button class="primary circular fixed-bottom-right" @click="nuevo()" style="right: 18px; bottom: 18px;">
+    <button class="primary circular fixed-bottom-right generic-margin" @click="nuevo()">
       <i>add</i>
     </button>
   </div>

@@ -13,7 +13,7 @@
   import { fullCalendarHabitacion, fullCalendarReserva } from './../../../configs/urls'
   import { mapState, mapGetters } from 'vuex'
   import Form from './../../util/Form'
-  import ReservaForm from './reservaForm'
+  import ReservaForm from './form/form'
 
   export default {
 
@@ -242,7 +242,7 @@
           // self.$store.dispatch('buscarHabitacion', resource.id)
           self.nuevaReserva.start = start
           self.nuevaReserva.end = end
-          self.nuevaReserva.habitacion.id = resource.id
+          self.nuevaReserva.habitacion.id = parseInt(resource.id)
           self.$refs.basicModal.open()
           self.mostrar = true
         },
