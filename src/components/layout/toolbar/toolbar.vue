@@ -13,10 +13,7 @@
       Gestor Reservas
     </q-toolbar-title>
     <div class="right-items">
-      <message-popover></message-popover>
-      <a @click="setMobileMode(true)" class="text-white gt-sm inline">
-        <i class="fa fa-3x fa-mobile"></i>
-      </a>
+      <message-popover></message-popover>     
       <a href="https://github.com/odranoelBR/vue-quasar-admin-example" class="text-white">
         <i class="fa fa-2x fa-github"></i>
       </a>
@@ -24,7 +21,7 @@
   </div>
 </template>
 <script type="text/javascript">
-  import { mapMutations, mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex'
   import messagePopover from './messagePopover.vue'
   export default {
     computed: {
@@ -32,9 +29,6 @@
       leftDrawer () {
         return this.$parent.$children[1].$refs.leftDrawer
       }
-    },
-    methods: {
-      ...mapMutations(['setMobileMode'])
     },
     components: {
       messagePopover

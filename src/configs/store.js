@@ -13,7 +13,6 @@ Vue.use(Vuex)
 let state = {
   layoutNeeded: false,
   isLoginPage: true,
-  mobileMode: false,
   menuCollapse: true,
 
   posts: []
@@ -25,9 +24,6 @@ let mutations = {
   },
   setIsLoginPage (state, value) {
     state.isLoginPage = value
-  },
-  setMobileMode (state, value) {
-    state.mobileMode = value
   },
   setMenuCollapse (state, value) {
     state.menuCollapse = value
@@ -43,9 +39,6 @@ let getters = {
   },
   getIsLoginPage () {
     return state.isLoginPage
-  },
-  getMobileMode () {
-    return state.mobileMode
   },
   getMenuCollapse () {
     return state.menuCollapse
