@@ -24,6 +24,9 @@ const actions = {
 const getters = {
   getUsuario (state) {
     return state.usuario
+  },
+  getNombreUsuario (state) {
+    return state.usuario.nombre + ' ' + state.usuario.apellido
   }
 }
 

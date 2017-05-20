@@ -1,54 +1,60 @@
 <template>
   <div class="layout-padding">
     <form @submit.prevent="submit" @keydown="habitacionNuevo.errors.clear($event.target.name)" novalidate>
-      <div class="floating-label">
-        <input
-        type="text"
-        v-model="habitacionNuevo.nombre"
-        class="full-width"
-        required
-        name="nombre"
-        v-error="{ form: habitacionNuevo, campo: 'nombre' }"
-        >
-        <label for="nombre">Nombre</label>
-        <form-help nombre="nombre" :form="habitacionNuevo"/>
-      </div>
-      <div class="item-content">
-        <label>
-          <q-checkbox
-          v-model="habitacionNuevo.camaMatrimonial"
-          v-error="{ form: habitacionNuevo, campo: 'nombre' }"></q-checkbox>
-          Con cama matrimonial
-        </label>
-        <form-help nombre="camaMatrimonial" :form="habitacionNuevo"/>
-
-      </div>
-
-
-      <div class="item-content">
-        <span class="item-label">Capacidad: </span>
-        <q-numeric
-        v-model="habitacionNuevo.capacidad"
-        :min="1"
-        :max="50"
-        v-error="{ form: habitacionNuevo, campo: 'capacidad' }"
-        ></q-numeric>
-        <form-help nombre="capacidad" :form="habitacionNuevo"/>
-      </div>
-
-      <div class="item multiple-lines">
-        <span class="item-label">Tipo habitación: </span>
-         <div class="item-content">
-           <q-select
-             class="full-width"
-             type="list"
-             v-model="habitacionNuevo.tipoHabitacion.id"
-             :options="getTipoHabitacionesSelect"
-             v-error="{ form: habitacionNuevo, campo: 'tipoHabitacion' }"
-           ></q-select>
+    <div class="list">
+        <div class="item">
+          <div class="item-content">
+            <div class="floating-label">
+              <input
+              type="text"
+              v-model="habitacionNuevo.nombre"
+              class="full-width"
+              required
+              name="nombre"
+              v-error="{ form: habitacionNuevo, campo: 'nombre' }"
+              >
+              <label for="nombre">Nombre</label>
+              <form-help nombre="nombre" :form="habitacionNuevo"/>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-content">
+            <label>
+              <q-checkbox
+              v-model="habitacionNuevo.camaMatrimonial"
+              v-error="{ form: habitacionNuevo, campo: 'nombre' }"></q-checkbox>
+              Con cama matrimonial
+            </label>
+            <form-help nombre="camaMatrimonial" :form="habitacionNuevo"/>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-content">
+            <span class="item-label">Capacidad: </span>
+            <q-numeric
+            v-model="habitacionNuevo.capacidad"
+            :min="1"
+            :max="50"
+            v-error="{ form: habitacionNuevo, campo: 'capacidad' }"
+            ></q-numeric>
+            <form-help nombre="capacidad" :form="habitacionNuevo"/>
+          </div>
+        </div>
+        <div class="item multiple-lines">
+          <div class="item-content">
+            <span class="item-label">Tipo habitación: </span>
+              <q-select
+                class="full-width"
+                type="list"
+                v-model="habitacionNuevo.tipoHabitacion.id"
+                :options="getTipoHabitacionesSelect"
+                v-error="{ form: habitacionNuevo, campo: 'tipoHabitacion' }"
+              ></q-select>
+           </div>
          </div>
-       </div>
-       <form-help nombre="tipoHabitacion" :form="habitacionNuevo"/>
+         <form-help nombre="tipoHabitacion" :form="habitacionNuevo"/>
+      </div>
       <button class="primary pull-right" type="submit">
         {{ modoEditar ? 'Editar' : 'Registrar' }} Tipo Habitación
       </button>

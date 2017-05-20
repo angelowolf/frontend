@@ -14,10 +14,12 @@
       </template>
       <hr>
     </template>
+    
     <q-drawer-link icon="dashboard" :to="{path: '/dashboard', exact: true}"> Dashboard</q-drawer-link>    
-    <q-drawer-link icon="dashboard" :to="{path: '/reservas', exact: true}"> Reservas</q-drawer-link>    
-    <q-drawer-link icon="person" :to="{path: '/tipoHabitacion', exact: true}"> Tipo Habitaciones</q-drawer-link>    
-    <q-drawer-link icon="person" :to="{path: '/habitacion', exact: true}"> Habitaciónes</q-drawer-link>    
+    <q-drawer-link icon="dashboard" :to="{path: '/reservas', exact: true}"> Reservas</q-drawer-link>
+    <q-drawer-link icon="person" :to="{path: '/tipoHabitacion', exact: true}"> Tipo de Habitaciones</q-drawer-link>
+    <q-drawer-link icon="person" :to="{path: '/habitacion', exact: true}"> Habitaciones</q-drawer-link>
+    <q-drawer-link icon="person" :to="{path: '/test', exact: true}"> test</q-drawer-link>
   </div>
 </template>
 

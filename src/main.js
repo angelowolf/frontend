@@ -6,8 +6,8 @@ require(`./themes/app.${__THEME}.styl`)
 // require(`quasar/dist/quasar.${__THEME}.css`)
 // ==============================
 if (window.localStorage) {
-  if (store.state.auth.token !== JSON.stringify(window.localStorage.getItem('authUser'))) {
-    store.dispatch('setToken', window.localStorage.getItem('authUser'))
+  if (store.state.auth.token !== JSON.stringify(window.localStorage.getItem('token'))) {
+    store.dispatch('setToken', window.localStorage.getItem('token'))
     store.dispatch('setUsuario', JSON.parse(window.localStorage.getItem('usuario')))
   }
 }
@@ -44,6 +44,31 @@ Vue.directive('error', (el, binding) => {
     }
     else {
       el.className = el.className.replace('has-error', '')
+    }
+  }
+})
+
+Vue.directive('permiso', function (el, binding) {
+  let grupos = JSON.parse(window.localStorage.getItem('grupos'))
+  let funcion = 'permisoVer'
+
+  if (binding.value.funcion) {
+    funcion = 'permiso' + binding.value.funcion
+  }
+  if (grupos) {
+    let flag = false
+    grupos.map(grupo => {
+      if (grupo.nombre === binding.value.nombre) {
+        grupo.funcionalidadGrupos.map(funcionalidad => {
+          if (funcionalidad[funcion]) {
+            flag = true
+          }
+        })
+      }
+    })
+
+    if (!flag) {
+      el.style.display = 'none'
     }
   }
 })

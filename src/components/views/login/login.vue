@@ -9,7 +9,7 @@
         </svg>
         <h4>Iniciar Sesión</h4>
       </div>
-      <form novalidate @submit.prevent="login">
+      <div v-if="pasoUno">
         <div class="card-content bg-white">
           <div class="stacked-label">
             <input required class="full-width" type="text" name="username" v-model="usuario">
@@ -17,13 +17,19 @@
           </div>
           <div class="stacked-label">
             <input required class="full-width" type="password" name="password" v-model="password">
-            <label>Password</label>
+            <label>Contraseña</label>
           </div>
         </div>
         <div class="card-actions inline-block vertical-middle">
-          <button class="teal fit normal" @click="login()">Entrar</button>
+          <button class="teal fit normal" @click="login()">Iniciar Sesión</button>
         </div>
-      </form>
+      </div>
+      <div v-else class="card-content bg-white">
+        <p class="text-black">Seleccione su servicio:</p>
+        <div v-for="servicio in servicios">
+          <button class="teal fit normal" @click="login(servicio)">{{servicio.nombre}}</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -36,11 +42,11 @@
   import axios from 'axios'
   import { Platform } from 'quasar'
   import { Toast } from 'quasar'
-  import { loginUrl } from '../../../configs/urls'
+  import { loginUrlPasoUno, loginUrlPasoDos } from '../../../configs/urls'
 
   export default {
     beforeCreate () {
-      if (window.localStorage.getItem('authUser') && window.localStorage.getItem('authUser') !== '') {
+      if (window.localStorage.getItem('token') && window.localStorage.getItem('token') !== '') {
         this.$router.push('/dashboard')
       }
     },
@@ -66,7 +72,10 @@
         logo: 'Digitalizer',
         usuario: '',
         password: '',
-        vivus: ''
+        vivus: '',
+        pasoUno: true,
+        servicios: [],
+        authUser: ''
       }
     },
     methods: {
@@ -75,26 +84,48 @@
         'setUsuario'
       ]),
       ...mapMutations(['setLayoutNeeded', 'setIsLoginPage']),
-      login () {
-        axios.post(loginUrl, {
-          usuario: this.usuario,
-          clave: this.password
-        })
-        .then(response => {
-          window.localStorage.setItem('authUser', response.data.datos.token)
-          this.setUsuario(response.data.datos)
-          this.setToken(response.data.datos.token)
-          const usuario = {
-            nombre: response.data.datos.nombre,
-            apellido: response.data.datos.apellido,
-            id: response.data.datos.id
+      login (servicioSeleccionado) {
+        if (this.pasoUno) {
+          axios.post(loginUrlPasoUno, {
+            usuario: this.usuario,
+            clave: this.password
+          })
+          .then(response => {
+            const datos = response.data.datos
+            this.authUser = datos.userToken
+            window.localStorage.setItem('grupos', JSON.stringify(datos.grupos))
+            this.setUsuario(datos)
+            this.setToken(datos.userToken)
+            const usuario = {
+              nombre: datos.nombre,
+              apellido: datos.apellido,
+              id: datos.id
+            }
+            this.servicios = datos.clienteSistema
+            this.pasoUno = false
+            window.localStorage.setItem('usuario', JSON.stringify(usuario))
+          })
+          .catch(error => {
+            Toast.create('Credenciales inválidas')
+          })
+        } else {
+          if (servicioSeleccionado) {
+              console.log(servicioSeleccionado)
+              axios.post(loginUrlPasoDos, {
+                userToken: this.authUser,
+                uuidClienteSistema: servicioSeleccionado.uuidClienteSistema
+              })
+              .then(response => {
+                const token = response.data.datos.token
+                window.localStorage.setItem('token', token)
+                this.setToken(token)
+                this.$router.push('/dashboard')
+              })
+              .catch(error => {
+                Toast.create('Ocurrió un error')
+              })
           }
-          window.localStorage.setItem('usuario', JSON.stringify(usuario))
-          this.$router.push('/dashboard')
-        })
-        .catch(error => {
-          Toast.create('Credenciales inválidas')
-        })
+        }
       },
       startAnimation () {
         this.vivus = new Vivus('logo', {

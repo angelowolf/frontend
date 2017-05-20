@@ -2,6 +2,8 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import auth from './modules/auth'
 import usuariosStore from './modules/usuariosStore'
+import dominioStore from './modules/dominioStore'
+import clienteSistemaStore from './modules/clienteSistemaStore'
 import tipoHabitacionesStore from './modules/tipoHabitacionesStore'
 import habitacionesStore from './modules/habitacionesStore'
 import tipoDocumentos from './modules/tipoDocumentos'
@@ -60,6 +62,8 @@ export default new Vuex.Store({
   modules: {
     auth,
     usuariosStore,
+    dominioStore,
+    clienteSistemaStore,
     tipoHabitacionesStore,
     habitacionesStore,
     tipoDocumentos

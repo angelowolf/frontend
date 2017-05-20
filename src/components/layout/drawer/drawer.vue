@@ -3,24 +3,26 @@
     <div id="profile">
       <img src="../img/avatar-1.svg" id="avatar" class="inline-block">
       <div id="user-name">
-        <span class="text-white">Greldon</span>
+        <span class="text-white">{{getNombreUsuario}}</span>
         <hr>
       </div>
       <div id="user-actions">
-        <button class="bordered blue small" ><i>person</i></button>
-        <button class="bordered blue small" ><i>lock</i></button>
-        <router-link to="login-one">
-          <button class="bordered blue small" ><i>exit_to_app</i></button>
+        <router-link to="i">
+          <button class="bordered blue small" ><i>person</i></button>
         </router-link>
+        <button class="bordered blue small" ><i>lock</i></button>
+        <button class="bordered blue small" @click="logout"><i>exit_to_app</i></button>
       </div>
     </div>
-    <menu-one v-if="getMenuCollapse" :links="links"></menu-one>
-    <menu-two v-else :links="links"></menu-two>
+    <menu-admin v-if="getMenuCollapse" v-permiso="{nombre:'administrador'}"></menu-admin>
+    <menu-one v-if="getMenuCollapse" :links="links" v-permiso="{nombre:'cliente'}"></menu-one>
+    <menu-two v-else :links="links" v-permiso="{nombre:'cliente'}"></menu-two>
 
     <div class="fixed-bottom text-center light text-italic">
-      Powered by
+      <!--Powered by
       <a href="https://vuejs.org/"><img src="../img/vue-logo.png" alt=""></a>
       <a href="http://quasar-framework.org/"><img src="../img/quasar-logo.png" alt=""></a>
+      -->
     </div>
   </q-drawer>
 </template>
@@ -28,6 +30,7 @@
   import { mapGetters } from 'vuex'
   import menuOne from './menuOne.vue'
   import menuTwo from './menuTwo.vue'
+  import menuAdmin from './menuAdmin.vue'
   export default {
     data () {
       return {
@@ -36,11 +39,20 @@
       }
     },
     computed: {
-      ...mapGetters(['getLayoutNeeded', 'getMenuCollapse'])
+      ...mapGetters(['getLayoutNeeded', 'getMenuCollapse', 'getNombreUsuario'])
     },
     components: {
       menuOne,
-      menuTwo
+      menuTwo,
+      menuAdmin
+    },
+    methods: {
+      logout () {
+        window.localStorage.removeItem('token')
+        window.localStorage.removeItem('usuario')
+        window.localStorage.removeItem('grupos')
+        this.$router.push('/')
+      }
     }
   }
 </script>
@@ -65,6 +77,7 @@
     bottom: 77px;
     position: relative;
     width: 159px;
+    text-transform: capitalize;
   }
   #user-actions {
     left: 90px;

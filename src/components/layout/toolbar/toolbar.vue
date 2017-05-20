@@ -10,7 +10,7 @@
       <i>menu</i>
     </button>
     <q-toolbar-title :padding="1">
-      Quasar Admin App
+      Gestor Reservas
     </q-toolbar-title>
     <div class="right-items">
       <message-popover></message-popover>

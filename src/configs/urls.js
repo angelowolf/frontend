@@ -1,5 +1,6 @@
 export const apiDomain = 'http://localhost:8080/api/'
-export const loginUrl = apiDomain + 'autorizar/login'
+export const loginUrlPasoUno = apiDomain + 'autorizar/login'
+export const loginUrlPasoDos = apiDomain + 'autorizar/generarToken'
 export const usuarioUrl = apiDomain + 'usuario/'
 export const hijosListUrl = apiDomain + 'api/hijos'
 export const tipoHabitacionUrl = apiDomain + 'tipohabitacion/'
@@ -7,6 +8,9 @@ export const habitacionUrl = apiDomain + 'habitacion/'
 export const reservaUrl = apiDomain + 'reserva/'
 export const tipoDocumentoUrl = apiDomain + 'tipodocumento/'
 export const pasajeroUrl = apiDomain + 'pasajero/'
+
+export const dominioUrl = apiDomain + 'dominio/'
+export const clienteSistemaUrl = apiDomain + 'clientesistema/'
 
 export const fullCalendar = apiDomain + 'fullcalendar/'
 export const fullCalendarHabitacion = fullCalendar + 'habitacion/'

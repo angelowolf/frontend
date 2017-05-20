@@ -4,10 +4,19 @@
         <span id="content-header-title" class="vertical-bottom">Bienvenido, {{getUsuario.nombre}}</span>
       <hr>
     </div>
+      <div class="card">
+        <div class="card-title bg-primary text-white">
+          Colored Card Title
+        </div>
+        <div class="card-content card-force-top-padding">
+          Card Content
+        </div>
+      </div>
+
     <div class="flex wrap gutter">
       <div class="width-1of3 sm-auto">
         <cardTotal
-          title="Total Posts"
+          title="Mensajes"
           background-color="bg-teal-9"
           icon-name="local_post_office"
           :total="totalPosts">
@@ -15,7 +24,7 @@
       </div>
       <div class="width-1of3 sm-auto">
         <cardTotal
-          title="Total comments"
+          title="Clientes"
           background-color="bg-teal-7"
           icon-name="comment"
           :total="totalComments">
@@ -23,7 +32,7 @@
       </div>
       <div class="width-1of3 sm-auto">
         <cardTotal
-          title="Static total"
+          title="Errores"
           background-color="bg-teal-5"
           icon-name="repeat_one"
           :total="0">
